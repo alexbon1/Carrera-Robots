@@ -3,37 +3,37 @@ package pack1;
 import java.util.Random;
 
 public class Robot extends Thread {
-	private String nombre;
-	private int distancia;
-	private int posicion;
-	private long tiempoFinalizacion;
-	 private boolean lesionado;
+    private String nombre;
+    private int distancia;
+    private int posicion;
+    private long tiempoFinalizacion;
+    private boolean lesionado;
 
-	public Robot(String nombre, int distancia) {
-		this.nombre = nombre;
-		this.distancia = distancia;
-		this.posicion = 0;
-		this.tiempoFinalizacion = 0;
-		this.lesionado = false;
-	}
+    public Robot(String nombre, int distancia) {
+        this.nombre = nombre;
+        this.distancia = distancia;
+        this.posicion = 0;
+        this.tiempoFinalizacion = 0;
+        this.lesionado = false;
+    }
 
-	@Override
-	 public void run() {
+    @Override
+    public void run() {
         int distanciaRecorrida = 0;
 
         while (distanciaRecorrida < distancia) {
-            // Genera un número aleatorio entre 1 y 100
+            // Genera un número aleatorio entre 1 y 100 para simular la probabilidad de lesión
             int probabilidadLesion = new Random().nextInt(100) + 1;
 
             // Si la probabilidad es 1 (1%), el robot se lesiona
             if (probabilidadLesion == 1) {
                 lesionar();
                 System.out.println(nombre + " ha sido lesionado y no puede continuar.");
-                break; // Sale del bucle
+                break; // Sale del bucle si se lesiona
             }
 
             // Avance aleatorio si no se ha lesionado
-            distanciaRecorrida += (int)(Math.random() * 10 + 1);
+            distanciaRecorrida += (int) (Math.random() * 10 + 1);
 
             // Actualiza la posición
             this.posicion = distanciaRecorrida;
@@ -48,32 +48,33 @@ public class Robot extends Thread {
             System.out.println(nombre + " ha llegado a la meta.");
         }
     }
-	public String getNombre() {
-		return nombre;
-	}
-	   public void lesionar() {
-	        lesionado = true;
-	    }
 
-	public int getPosicion() {
-		return posicion;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public long getTiempoFinalizacion() {
-		return tiempoFinalizacion;
-	}
+    public void lesionar() {
+        lesionado = true;
+    }
 
-	public void sleep() {
-		try {
-			Thread.sleep(1000); // Pausa el programa durante 1 segundo (1000 milisegundos)
-		} catch (InterruptedException e) {
-			// Manejo de excepciones en caso de interrupción
-			e.printStackTrace();
-		}
-	}
+    public int getPosicion() {
+        return posicion;
+    }
 
-	public boolean isLesionado() {
-		
-		return lesionado;
-	}
+    public long getTiempoFinalizacion() {
+        return tiempoFinalizacion;
+    }
+
+    public void sleep() {
+        try {
+            Thread.sleep(1000); // Pausa el programa durante 1 segundo (1000 milisegundos)
+        } catch (InterruptedException e) {
+            // Manejo de excepciones en caso de interrupción
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isLesionado() {
+        return lesionado;
+    }
 }
